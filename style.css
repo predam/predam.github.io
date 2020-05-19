@@ -1,0 +1,42 @@
+html, body {
+   height: 100%;
+}
+canvas {
+
+    border: 1px solid gray;
+}
+.btn{
+    margin-bottom: 10px;
+}
+/* 
+main {
+    padding: 0.5em;
+    max-width: 25em;
+    border-top: 0.5px dotted  rgb(47, 79, 38);
+    border-left: 0.5px dotted  rgb(47, 79, 38);
+    border-bottom: 0.5px dotted  rgb(47, 79, 38);
+}
+
+canvas {
+    border: 0.5px dotted  rgb(47, 79, 38);
+    background-color: rgb(244, 237, 206);
+    min-width: 1000px;
+    width: 1000px;
+    height: auto;
+
+}
+
+.inputcontaner {
+    display: flex;
+    flex-direction: column;
+    width: 15vw;
+    min-width: 15vw;
+}
+
+
+production:nth-child(0) {
+    width: 200px;
+}
+production:nth-child(1) {
+    width: 19em;
+} */
