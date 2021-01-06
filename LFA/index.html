@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+    <title>L-Sisteme | Preda Mihai Alexandru | LFA</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+    <link rel="stylesheet" href="style.css">
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous"></script>
+    <script src="lindenmayer.min.js"></script>
+</head>
+<body onkeyup="update()">
+<div class="container">
+    <div class="row mt-4">
+        <div class="col-md-9 p-4 ">
+            <h1 class="heading-1"> Proiect L-Sisteme </h1>
+        <p>Aceasta aplicatie are scopul de a ilustra exemplele atasate in proiect</p>
+        <p class="text-muted">Preda Mihai Alexandru, Univeristatea din Bucuresti, Facultatea de Matematica si Informatica <br> Grupa IDD, Anul 1, 2020</p>
+        <code class="mb-4">Incarca un exemplu</code> <br>
+        
+        <button class="btn btn-secondary" onclick="loadKnoch()">Konch Snowflake</button>
+        <button class="btn btn-secondary" onclick="loadSier()">Sierpiński curve</button>
+        <button class="btn btn-secondary" onclick="loadDragon()">The Dragon Curve</button>
+        <canvas id="canvas" width="800" height="800"></canvas>
+        </div>
+        <div class="col-md-3 p-4 inputcontainer">
+            <div class="form-group">
+                <label>Axioma</label>
+                <input class="form-control" id="axiom" type="text"> <br>
+            </div>
+
+            <div class="form-group">
+                <label >Iteriatii <span id="i-v"></span></label>
+                <input id="iterations" class="form-control-range" type="range" onchange="showValue(this, 'i-v')" min="1" max="12" value="2" oninput="update()"> <br>
+            </div>
+            <div class="form-group">
+                <label >Rotatie <span id="r-v"></span> grade</label>
+                <input id="rotation"  class="form-control-range" type="range" onchange="showValue(this, 'r-v')" min="0.0" max="360.0" value="45.0" oninput="window.requestAnimationFrame(draw)"> <br>
+            </div>
+            <div class="form-group">
+                <label >Lungime linie <span id="l-v"></span> px</label>
+                <input id="linelength"  class="form-control-range" type="range" onchange="showValue(this, 'l-v')" min="0.1" max="300.0" value="100.0" oninput="window.requestAnimationFrame(draw)"> <br>
+            </div>
+            <div class="form-group">
+                <label>Latime linie <span id="ll-v"></span> px</label>
+                <input id="linewidth"  class="form-control-range" type="range" onchange="showValue(this, 'll-v')" min="0.1" max="50.0"  value="1.0" oninput="window.requestAnimationFrame(draw)"> <br>
+             </div>
+            <div id="productions"  ></div>
+            <button class="btn btn-primary mt-3" type="button" onclick="addProductionField()">Adauga regula</button>
+        </div>
+    </div>
+   
+</div>
+		
+
+	<script>
+
+    function loadSier() {
+        removeRules();
+        axiomInput.value = "F--XF--F--XF"
+        rotationInput.value = 45
+        rv.innerText = 45
+        iterationInput.value = 4
+        iv.innerText = 6
+        lineLengthInput.value = 80
+        lv.innerText = 80
+        lineWidthInput.value = 1.2
+        llv.innerText = 1.2
+        addProductionField();
+        productionList.childNodes[0].childNodes[0].value = 'X';
+        productionList.childNodes[0].childNodes[1].value = 'XF+G+XF--F--XF+G+X';
+        
+        update();
+    }
+
+    function loadKnoch() {
+        removeRules();
+        axiomInput.value = "F"
+        rotationInput.value = 85
+        rv.innerText = 85
+        iterationInput.value = 6
+        iv.innerText = 6
+        lineLengthInput.value = 160
+        lv.innerText = 160
+        lineWidthInput.value = 1.2
+        llv.innerText = 1.2
+        addProductionField();
+        productionList.childNodes[0].childNodes[0].value = 'F';
+        productionList.childNodes[0].childNodes[1].value = 'F+F--F+F';
+        update();
+    }
+
+
+    function loadDragon() {
+        removeRules();
+        axiomInput.value = "FX"
+        rotationInput.value = 90
+        rv.innerText = 90
+        iterationInput.value = 12
+        iv.innerText = 12
+        lineLengthInput.value = 300
+        lv.innerText = 300
+        lineWidthInput.value = 1.2
+        llv.innerText = 1.2
+        addProductionField();
+        productionList.childNodes[0].childNodes[0].value = 'X';
+        productionList.childNodes[0].childNodes[1].value = 'X+YF+';
+        addProductionField();
+        productionList.childNodes[1].childNodes[0].value = 'Y';
+        productionList.childNodes[1].childNodes[1].value = '-FX-Y';
+        update();
+
+    }
+
+    function showValue(e, output) {
+        document.getElementById(output).innerText=e.value; 
+    }
+
+    function removeRules() {
+        for (var i = 0; i < productionList.childNodes.length; i++) {
+			productionList.removeChild(productionList.childNodes[i])
+		}
+    }
+
+    var iv = document.getElementById('i-v');
+    var rv = document.getElementById('r-v');
+    var lv = document.getElementById('l-v');
+    var llv = document.getElementById('ll-v')
+
+    var canvas = document.getElementById('canvas');
+	var ctx = canvas.getContext("2d");
+	var axiomInput = document.getElementById('axiom');
+	var rotationInput = document.getElementById('rotation');
+	var iterationInput = document.getElementById('iterations');
+	var lineLengthInput = document.getElementById('linelength');
+	var lineWidthInput = document.getElementById('linewidth');
+	var productionList = document.getElementById('productions');
+	var lineLength, rotation;
+
+
+
+	var lsystem = new LSystem({
+		finals: {
+			'F': () => {
+				ctx.beginPath()
+				ctx.moveTo(0,0)
+				ctx.lineTo(0, lineLength)
+				ctx.stroke()
+				ctx.translate(0, lineLength)
+			},
+			'+': () => { ctx.rotate((Math.PI/180) * rotation) } ,
+			'-': () => { ctx.rotate((Math.PI/180) * -rotation) },
+			'[': () => { ctx.save() },
+			']': () => { ctx.restore() }
+		}
+	})
+
+	initWorker();
+
+	function addProductionField() {
+		var prodFrom = document.createElement('input');
+		var prodTo = document.createElement('input');
+		var prodRemove = document.createElement('button');
+		var prodEval = document.createElement('input');
+		var prodContainer = document.createElement('div');
+		prodContainer.className = "production";
+        prodFrom.type = prodTo.type = 'text';
+        prodTo.className = "form-control";
+        prodFrom.className = "form-control";
+        prodRemove.type = 'button';
+
+        prodRemove.className = "btn btn-danger w-100";
+		prodRemove.innerHTML = 'Sterge regula';
+		
+		prodEval.type = 'checkbox';
+        prodEval.id = 'evalStringCheckbox';
+        prodEval.hidden = true;
+
+
+		prodRemove.onclick = function() {
+			removeProductionField(prodContainer)
+		}
+
+		prodContainer.appendChild(prodFrom);
+		prodContainer.appendChild(prodTo);
+		prodContainer.appendChild(prodEval);
+		prodContainer.appendChild(prodRemove);
+		productionList.appendChild(prodContainer);
+	}
+
+	function removeProductionField(production) {
+		productionList.removeChild(production);
+		update();
+	}
+
+	function update() {
+		// gather info from text fields
+		var params = {
+			axiom: 		axiomInput.value,
+			rotation: rotationInput.value,
+			productions: [],
+			iterations: iterationInput.value
+        }
+        
+    
+
+		for (var i = 0; i < productionList.childNodes.length; i++) {
+			let prod = productionList.childNodes[i];
+				params.productions.push({
+					parsejs: prod.childNodes[2].checked,
+					from: prod.childNodes[0].value,
+					to: prod.childNodes[1].value,
+				})
+		}
+
+
+		if(Date.now() - worker.startTime > 1000 ) {
+		
+			worker.terminate();
+			initWorker();
+		}
+		
+		worker.startTime = Date.now()
+		worker.postMessage(params)
+	}
+
+	function draw() {
+		ctx.setTransform(1, 0, 0, 1, 0, 0);
+		ctx.strokeStyle = '#007bff';
+		ctx.clearRect(0, 0, canvas.width, canvas.height);
+        ctx.translate(400, 600);
+		ctx.moveTo(0, 0);
+		ctx.rotate(Math.PI);
+		lineLength = lineLengthInput.value / Math.pow(iterationInput.value, 2);
+		lineWidth = lineWidthInput.value;
+		ctx.lineWidth = lineWidth;
+		rotation = rotationInput.value;
+		lsystem.final();
+	}
+
+	function initWorker() {
+		worker = new Worker("worker.js");
+		worker.onmessage = onWorkerUpdate;
+	}
+
+	function onWorkerUpdate(e) {
+		lsystem.setProductions(e.data.initial.productions);
+		lsystem.setAxiom(e.data.result);
+		window.requestAnimationFrame(draw);
+	}
+
+
+	addProductionField();
+	axiomInput.value = 'F++F++F++F';
+	productionList.childNodes[0].childNodes[0].value = 'F';
+	productionList.childNodes[0].childNodes[1].value = 'F-F++F-F';
+    update();
+
+    </script>
+</body>
+</html>

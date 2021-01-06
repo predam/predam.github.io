@@ -1,10 +1,40 @@
-html, body {
-   height: 100%;
+body {
+    font-family: "Space Mono",Monaco,Menlo,Consolas,monospace;
+    padding: 80px;
+    background: black;
+    color: white
 }
-canvas {
+a {
+    color: #30f9de;
+    text-decoration: none;
+    cursor: pointer;
+}
 
-    border: 1px solid gray;
+a:hover {
+    color: #06cc9a;
 }
-.btn{
+
+.bottom {
+    position: absolute;
+    bottom: 0;
+    margin-bottom: 80px;
+}
+
+p {
+    margin-bottom: 50px;
+}
+
+li {
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
     margin-bottom: 10px;
+}
+
+
+li div:first-child {
+    width: 110px;
+}
+li div:last-child {
+    width: calc(100%-100px);
 }
