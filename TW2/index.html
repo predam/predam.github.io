@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      rel="apple-touch-icon"
+      sizes="180x180"
+      href="./favicons/apple-touch-icon.png"
+    />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="32x32"
+      href="./favicons/favicon-32x32.png"
+    />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="16x16"
+      href="./favicons/favicon-16x16.png"
+    />
+    <link rel="manifest" href="./favicons/site.webmanifest" />
+    <title>PongThat</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <div class="container">
+      <div id="into">
+        <h3 class="anim-shake">PongThat!</h3>
+        <p>Can you win versus computer?</p>
+        <button id="start" class="btn-primary">Start game</button>
+        <button id="settings" class="btn-primary">Settings</button>
+
+        <div class="copy">
+          <small class="anim-hide">Preda Mihai @UNIBUC</small>
+        </div>
+      </div>
+      <div id="settings-box">
+        <h3>Settings</h3>
+        <div class="group">
+          <p>Ball Speed</p>
+          <div class="group">
+            <label>X Axis</label>
+            <input
+              type="number"
+              class="setting-value"
+              data-setting="ball-speed-x"
+            />
+            <label>PX</label>
+          </div>
+          <div class="group">
+            <label>Y Axis</label>
+            <input
+              type="number"
+              class="setting-value"
+              data-setting="ball-speed-y"
+            />
+            <label>PX</label>
+          </div>
+        </div>
+        <div class="group">
+          <label>Ball Size</label>
+          <input type="number" class="setting-value" data-setting="ball-size" />
+          <label>PX</label>
+        </div>
+        <div class="group">
+          <label>Ball Color</label>
+          <input
+            type="string"
+            class="setting-value"
+            data-setting="ball-color"
+          />
+          <label>HEX</label>
+        </div>
+        <div class="group">
+          <p>Paddle size</p>
+          <div class="group">
+            <label>X Axis</label>
+            <input
+              type="number"
+              class="setting-value"
+              data-setting="paddle-size-x"
+            />
+            <label>PX</label>
+          </div>
+          <div class="group">
+            <label>Y Axis</label>
+            <input
+              type="number"
+              class="setting-value"
+              data-setting="paddle-size-y"
+            />
+            <label>PX</label>
+          </div>
+        </div>
+        <div class="group">
+          <label>Winning score</label>
+          <input
+            type="number"
+            class="setting-value"
+            data-setting="winning-score"
+          />
+        </div>
+
+        <button id="save-settings" class="btn-primary">Save</button>
+      </div>
+      <div id="ui">
+        <button id="end" class="btn-primary">End game</button>
+      </div>
+      <canvas id="gameCanvas" width="800" height="600"></canvas>
+    </div>
+    <script src="app.js" async defer></script>
+  </body>
+</html>

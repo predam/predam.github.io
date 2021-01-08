@@ -356,12 +356,12 @@ function prepareAnswersListeners() {
         }, 1500);
       } else {
         document.querySelector("#game-question").innerHTML =
-          "Wrong answer! </br> Your score " + userStatus.score;
+          "Wrong answer! </br> Your score " + userStatus.score + " </br> Correct response: " + currentQuestion.correct;
 
         document.querySelector("#game-answers").style.display = "none";
         setTimeout(() => {
           document.getElementById("game-end").click();
-        }, 1500);
+        }, 2500);
       }
     });
   });
