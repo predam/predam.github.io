@@ -20,7 +20,7 @@ function App() {
   };
 
   return (
-    <div className="grid h-screen place-items-center bg-gray-100">
+    <div className="grid h-screen place-items-center bg-gray-100 p-5">
       <div>
         <h2 className="mb-5 font-bold text-3xl text-center">Irregular Verbs Flashcards</h2>
         <Card verb={getCurrentVerb()} next={next} />

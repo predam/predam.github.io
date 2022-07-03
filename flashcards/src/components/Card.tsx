@@ -10,7 +10,7 @@ const Card: React.FC<{ verb: IrregularVerb; next: () => void }> = ({ verb, next 
     setIsHidden(true);
   }, [verb]);
   return (
-    <div className="card w-96 bg-base-100 shadow-xl">
+    <div className="card w-full md:w-96 bg-base-100 shadow-xl">
       <div className="card-body text-center">
         {isHidden && <h2 className="font-bold text-lg mt-5 mb-10">{verb.present}</h2>}
         {!isHidden && (
